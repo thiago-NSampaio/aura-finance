@@ -1,0 +1,33 @@
+.logo-container {
+  position: relative;
+  background: linear-gradient(170deg, #b66dffab, #0564d9ab);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 40px 10px rgba(0, 0, 0, 0.8),
+              0 0 30px rgba(183, 109, 255, 0.2); 
+  animation: pulse-atmosphere 4s infinite ease-in-out;
+}
+
+.inner-circle {
+  background-color: #12121a; /* Fundo escuro do miolo */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes pulse-atmosphere {
+  0% {
+    box-shadow: inset 0 0 40px 10px rgba(0, 0, 0, 0.85),
+                0 0 25px rgba(183, 109, 255, 0.15);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: inset 0 0 25px 2px rgba(0, 0, 0, 0.6),
+                0 0 50px rgba(183, 109, 255, 0.4),
+                0 0 70px rgba(5, 102, 217, 0.2);
+    transform: scale(1.02);
+  }
+  100% {
+    box-shadow: inset 0 0 40px 10px rgba(0, 0, 0, 0.85),
+                0 0 25px rgba(183, 109, 255, 0.15);
+    transform: scale(1);
+  }
+}
