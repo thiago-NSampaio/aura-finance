@@ -1,0 +1,11 @@
+<nav
+  class="h-full overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-none"
+>
+  <div class="pb-0 px-2 w-full flex flex-col flex-wrap">
+    <ul class="space-y-1">
+      @for (item of menuItems; track item.route) {
+        <app-item-menu [name]="item.name" [srcIcon]="item.icon" [route]="item.route" />
+      }
+    </ul>
+  </div>
+</nav>

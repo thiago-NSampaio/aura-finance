@@ -1,0 +1,49 @@
+<!-- Navigation Toggle -->
+<!-- <div class="lg:hidden py-16 text-center">
+  <button
+    type="button"
+    class="py-2 px-3 inline-flex justify-center items-center gap-x-2 text-start bg-secondary border border-secondary-line text-secondary-foreground text-sm font-medium rounded-lg shadow-2xs hover:bg-secondary-hover focus:outline-hidden focus:bg-secondary-focus"
+    aria-haspopup="dialog"
+    aria-expanded="false"
+    aria-controls="hs-sidebar-basic-usage"
+    aria-label="Toggle navigation"
+    data-hs-overlay="#hs-sidebar-basic-usage"
+  >
+    Open
+  </button>
+</div> -->
+<!-- End Navigation Toggle -->
+
+<!-- Sidebar -->
+<aside
+  class="bg-[#201F1F60] [--auto-close:lg] lg:block lg:translate-x-0 lg:inset-e-auto lg:bottom-0 w-64 -translate-x-full transition-all duration-300 transform h-full hidden fixed top-0 inset-s-0 bottom-0 z-60 border-e border-[#353534]"
+  role="dialog"
+  tabindex="-1"
+  aria-label="Sidebar"
+>
+  <div class="relative flex flex-col h-full max-h-full">
+    <!-- Header -->
+    <header class="p-4 flex justify-between items-center gap-x-2">
+      <app-brand-menu></app-brand-menu>
+    </header>
+    <!-- End Header -->
+
+    <!-- Body -->
+    <app-navbar></app-navbar>
+    <!-- End Body -->
+    <footer class="mt-auto w-full px-4 mb-4">
+      <button
+        type="button"
+        class="flex w-full py-3 px-4 rounded-full bg-linear-to-r cursor-pointer from-[#DDB7FF] to-[#ADC6FF]"
+      >
+        <svg-icon
+          src="icons/voice-button.svg"
+          [svgStyle]="{ 'width.px': 14, 'height.px': 19, fill: '#490080' }"
+        ></svg-icon>
+
+        <span class="text-[#490080] flex-1">Iniciar Sessão de Voz</span>
+      </button>
+    </footer>
+  </div>
+</aside>
+<!-- End Sidebar -->

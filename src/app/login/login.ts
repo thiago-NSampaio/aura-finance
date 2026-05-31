@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { SvgIconComponent } from 'angular-svg-icon';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-login',
   imports: [SvgIconComponent],
-  templateUrl: './home.html',
-  styleUrl: './home.scss',
+  templateUrl: './login.html',
+  styleUrl: './login.scss',
 })
-export class Home {
+export class Login {
 
 }
