@@ -1,0 +1,21 @@
+<article class="bg-[#201F1F20] p-4 rounded-4xl flex flex-col h-75 min-w-77.5 min-h-75">
+  <div class="mb-4">
+    <div class="flex justify-between w-full">
+      <h2 class="text-xl text-[#E5E2E1]">{{ title }}</h2>
+
+      <div></div>
+    </div>
+
+    @if (subtitle) {
+      <p class="text-xs text-[#CFC2D6]">{{ subtitle }}</p>
+    }
+  </div>
+
+  <div class="flex-1 flex">
+    <ng-content></ng-content>
+  </div>
+
+  <footer class="mt-auto text-[#CFC2D6]">
+    {{ footer }}
+  </footer>
+</article>
