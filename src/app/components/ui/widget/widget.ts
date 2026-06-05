@@ -10,4 +10,5 @@ export class Widget {
   @Input() title = '';
   @Input() subtitle = '';
   @Input() footer = '';
+  @Input() buttonName = '';
 }

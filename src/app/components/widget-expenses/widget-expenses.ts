@@ -7,6 +7,7 @@ import { Widget } from "../ui/widget/widget";
   templateUrl: './widget-expenses.html',
   styleUrl: './widget-expenses.scss',
 })
+
 export class WidgetExpenses {
 
 }
