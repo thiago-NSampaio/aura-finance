@@ -1,0 +1,24 @@
+<li class="flex w-full justify-between gap-y-2 p-3">
+  <div class="w-full flex gap-x-4">
+    <div class="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center">
+      <svg-icon
+        [src]="'icons/category/' + category + '.svg'"
+        [svgStyle]="{ 'width.px': 14, 'height.px': 19 }"
+      ></svg-icon>
+    </div>
+    <div class="flex flex-col">
+      <span class="w-full text-[#CFC2D6]">{{ description }}</span>
+
+      <div class="flex w-full text-[#CFC2D6]">
+        <p>{{ category }}</p>
+        <i class="rounded-full text-[#CFC2D6] h-5 w-5">&ac;</i>
+        <p>{{ date }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <i>{{ value > 0 ? '+' : '-' }}</i>
+    <span>{{ value }}</span>
+  </div>
+</li>
