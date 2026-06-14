@@ -14,5 +14,13 @@ import { WidgetSpendingAnalysis } from "../components/widget-spending-analysis/w
   styleUrl: './dashboard.scss',
 })
 export class Dashboard {
-  
+  expenseData = [
+  { label: 'Seg', value: 120 },
+  { label: 'Ter', value: 90 },
+  { label: 'Qua', value: 180 },
+  { label: 'Qui', value: 140 },
+  { label: 'Sex', value: 220 },
+  { label: 'Sab', value: 170 },
+  { label: 'Dom', value: 250 },
+];
 }
