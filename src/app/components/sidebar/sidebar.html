@@ -8,10 +8,15 @@
 
     <app-navbar></app-navbar>
 
-    <footer class="mt-auto w-full px-4 mb-4">
+    <div class="mt-auto w-full px-4 mb-4">
       <button
         type="button"
-        class="flex w-full py-3 px-4 rounded-full bg-linear-to-r cursor-pointer from-[#DDB7FF] to-[#ADC6FF]"
+        class="flex w-full py-3 px-4 rounded-full bg-linear-to-r from-[#DDB7FF] to-[#ADC6FF]"
+        [disabled]="isActive('/voice-assistant')"
+        [ngClass]="{
+          'cursor-not-allowed opacity-50': isActive('/voice-assistant'),
+          'cursor-pointer': !isActive('/voice-assistant'),
+        }"
       >
         <svg-icon
           src="icons/voice-button.svg"
@@ -20,6 +25,6 @@
 
         <span class="text-[#490080] flex-1">Iniciar Sessão de Voz</span>
       </button>
-    </footer>
+    </div>
   </div>
 </aside>

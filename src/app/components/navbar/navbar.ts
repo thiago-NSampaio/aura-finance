@@ -18,7 +18,7 @@ export class Navbar {
   {
     name: 'Assistente de Voz',
     icon: 'icons/voice.svg',
-    route: '/voice',
+    route: '/voice-assistant',
   },
   {
     name: 'Transações',

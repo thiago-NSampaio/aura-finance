@@ -1,0 +1,46 @@
+<div
+  class="flex h-full grow bg-[#09090B] text-[#E5E2E1]"
+  [ngClass]="{ 'justify-center': !hasMessages }"
+>
+  @if (hasMessages) {
+    <header class="flex justify-center py-6">
+      <span class="px-4 py-1 rounded-full bg-[#FFFFFF08] text-xs text-[#CFC2D6]">
+        Hoje, 14:32
+      </span>
+    </header>
+  }
+
+  @if (hasMessages) {
+    <!-- Chat -->
+    <section class="flex-1 overflow-y-auto px-6">
+      <div class="max-w-5xl mx-auto flex flex-col gap-y-8">
+        <!-- mensagens aqui -->
+      </div>
+    </section>
+  }
+  <!-- Input -->
+  <div
+    class="p-6"
+    [ngClass]="{
+      'flex justify-center items-center flex-1': !hasMessages,
+    }"
+  >
+    <div class="max-w-5xl mx-auto w-full">
+      <div class="h-16 rounded-full border border-[#FFFFFF10] bg-[#111214] flex items-center px-5">
+        <button class="w-8 h-8 flex items-center justify-center text-[#CFC2D6]">+</button>
+
+        <input
+          type="text"
+          placeholder="Fale ou digite para a Aura..."
+          class="flex-1 bg-transparent px-4 outline-none text-[#E5E2E1]"
+        />
+
+        <button class="px-4 h-10 rounded-full bg-[#DDB7FF20] text-[#DDB7FF]">🎤</button>
+      </div>
+
+      <p class="text-center text-xs text-[#707070] mt-3">
+        Aura AI pode cometer erros. Considere verificar informações importantes.
+      </p>
+    </div>
+  </div>
+</div>
