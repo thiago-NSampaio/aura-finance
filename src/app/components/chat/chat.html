@@ -1,5 +1,5 @@
 <div
-  class="flex h-full grow bg-[#09090B] text-[#E5E2E1]"
+  class="flex min-h-4/5 bg-[#09090B] text-[#E5E2E1]"
   [ngClass]="{ 'justify-center': !hasMessages }"
 >
   @if (hasMessages) {
@@ -27,7 +27,9 @@
   >
     <div class="max-w-5xl mx-auto w-full">
       <div class="h-16 rounded-full border border-[#FFFFFF10] bg-[#111214] flex items-center px-5">
-        <button class="w-8 h-8 flex items-center justify-center text-[#CFC2D6]">+</button>
+        <button class="w-8 h-8 flex items-center justify-center text-[#CFC2D6] cursor-pointer">
+          <svg-icon src="icons/plus.svg"></svg-icon>
+        </button>
 
         <input
           type="text"
@@ -35,7 +37,12 @@
           class="flex-1 bg-transparent px-4 outline-none text-[#E5E2E1]"
         />
 
-        <button class="px-4 h-10 rounded-full bg-[#DDB7FF20] text-[#DDB7FF]">🎤</button>
+        <button
+          class="flex gap-x-2 px-4 h-10 rounded-full items-center bg-[#DDB7FF20] text-[#DDB7FF] cursor-pointer"
+        >
+          <svg-icon src="icons/dynamic-waveform.svg"></svg-icon>
+          <svg-icon src="icons/voice.svg"></svg-icon>
+        </button>
       </div>
 
       <p class="text-center text-xs text-[#707070] mt-3">

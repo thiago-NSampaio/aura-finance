@@ -15,11 +15,12 @@ import { NgClass } from '@angular/common';
 export class Sidebar {
   constructor(private router: Router) {}
 
-  isActive(route: string): boolean {
-    console.log(route)
-    console.log(this.router.url)
-    console.log(this.router.url === route)
-
-    return this.router.url === route;
+  get isVoiceActive() {
+    return this.router.isActive('/voice-assistant', {
+      paths: 'exact',
+      queryParams: 'ignored',
+      fragment: 'ignored',
+      matrixParams: 'ignored',
+    });
   }
 }
