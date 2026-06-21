@@ -1,5 +1,5 @@
 <div
-  class="flex min-h-4/5 bg-[#09090B] text-[#E5E2E1]"
+  class="flex flex-col w-full bg-[#09090B] text-[#E5E2E1]"
   [ngClass]="{ 'justify-center': !hasMessages }"
 >
   @if (hasMessages) {
@@ -14,7 +14,61 @@
     <!-- Chat -->
     <section class="flex-1 overflow-y-auto px-6">
       <div class="max-w-5xl mx-auto flex flex-col gap-y-8">
-        <!-- mensagens aqui -->
+        <!-- User -->
+        <div class="flex justify-end">
+          <div
+            class="max-w-md px-4 py-3 rounded-2xl rounded-tr-none rouded border border-[#FFFFFF10] bg-[#FFFFFF05]"
+          >
+            Cancelei minha assinatura da Netflix
+          </div>
+        </div>
+        <!-- Assistant -->
+        <div class="flex gap-x-3">
+          <div class="w-8 h-8 rounded-full bg-[#DDB7FF20] flex items-center justify-center">🤖</div>
+          <div class="flex-1">
+            <span class="text-xs text-[#CFC2D6] mb-2 block"> Aura AI </span>
+            <div
+              class="inline-block pl-1 rounded-2xl rounded-tl-none bg-linear-to-b from-[#DDB7FF] to-[#ADC6FF]"
+            >
+              <div class="rounded-2xl rounded-tl-none border border-[#DDB7FF20] bg-[#0F1013] p-4">
+                <p class="leading-relaxed">
+                  Entendido. Registrei a remoção do gasto mensal de
+                  <span class="text-[#DDB7FF] font-semibold rounded-full px-1.5 bg-[#DDB7FF10]">
+                    R$ 55,90
+                  </span>
+                  na categoria
+                  <span class="text-[#ADC6FF] font-semibold rounded-full px-1.5 bg-[#ADC6FF10]">
+                    Entretenimento </span
+                  >. Deseja ver como isso afeta seu saldo de final de mês?
+                </p>
+              </div>
+            </div>
+            <!-- Confirmation Card -->
+            <div class="mt-4 rounded-3xl border border-[#FFFFFF10] bg-[#141518] p-4">
+              <div class="flex justify-between items-center mb-4">
+                <div class="flex gap-x-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-[#FFB4AB20] flex items-center justify-center"
+                  >
+                    📺
+                  </div>
+                  <div>
+                    <h3 class="font-medium">Netflix</h3>
+                    <p class="text-sm text-[#CFC2D6]">Assinatura Mensal</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="font-semibold">- R$ 55,90</div>
+                  <div class="text-sm text-[#FFB4AB]">Cancelado</div>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <button class="h-11 rounded-full bg-[#FFFFFF08] text-[#CFC2D6]">Editar</button>
+                <button class="h-11 rounded-full bg-[#DDB7FF20] text-[#DDB7FF]">Confirmar</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   }

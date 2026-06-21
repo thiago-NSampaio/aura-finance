@@ -8,5 +8,9 @@ import { Chat } from "../components/chat/chat";
   styleUrl: './voice-assistant.scss',
 })
 export class VoiceAssistant {
+  messages = [];
 
+  get hasMessages(): boolean {
+    return this.messages.length > 0;
+  }
 }

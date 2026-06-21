@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SvgIconComponent } from 'angular-svg-icon';
 
 @Component({
@@ -9,9 +9,5 @@ import { SvgIconComponent } from 'angular-svg-icon';
   styleUrl: './chat.scss',
 })
 export class Chat {
-  messages = [];
-
-  get hasMessages(): boolean {
-    return this.messages.length > 0;
-  }
+  @Input({required:true}) hasMessages: boolean = false;
 }
