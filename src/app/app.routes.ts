@@ -3,6 +3,7 @@ import { Login } from './login/login';
 import { Dashboard } from './dashboard/dashboard';
 import { Layout } from './layout/layout';
 import { VoiceAssistant } from './voice-assistant/voice-assistant';
+import { Transactions } from './transactions/transactions';
 
 export const routes: Routes = [
     {
@@ -16,6 +17,10 @@ export const routes: Routes = [
       {
         path: 'voice-assistant',
         component: VoiceAssistant,
+      },
+        {
+        path: 'transactions',
+        component: Transactions,
       },
     ],
   },
