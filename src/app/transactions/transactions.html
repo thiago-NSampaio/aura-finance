@@ -1,0 +1,257 @@
+<div class="mx-auto text-zinc-100 lg:gap-y-8 lg:p-10">
+  <div>
+    <header class="flex items-end justify-between gap-6">
+      <div class="mb-6">
+        <h1 class="text-2xl font-semibold tracking-tight">Transações</h1>
+        <p class="mt-1 text-sm text-zinc-400">
+          Histórico detalhado das suas movimentações financeiras.
+        </p>
+      </div>
+
+      <div class="min-w-55 max-w-[320px] flex-1">
+        <input
+          type="text"
+          placeholder="Buscar estabelecimento, categoria..."
+          class="w-full rounded-full border border-zinc-800 bg-zinc-900 px-4 py-2 text-sm text-zinc-100 outline-none transition-colors placeholder:text-zinc-500 focus:border-violet-600/70"
+        />
+      </div>
+    </header>
+
+    <div class="mb-4 flex flex-wrap items-center gap-3">
+      <div class="relative inline-flex items-center">
+        <select
+          class="cursor-pointer appearance-none rounded-full border border-zinc-800 bg-zinc-900 py-2 pl-9 pr-9 text-sm text-zinc-100 outline-none transition-colors hover:border-zinc-700 focus:border-violet-600/70"
+          [ngModel]="periodSelecionado"
+          (ngModelChange)="setPeriodo($event)"
+        >
+          @for (p of periods; track p.value) {
+            <option [value]="p.value">{{ p.label }}</option>
+          }
+        </select>
+
+        <span class="pointer-events-none absolute left-3.5 text-sm">📅</span>
+        <span class="pointer-events-none absolute right-3.5 text-[10px] text-zinc-500">▾</span>
+      </div>
+
+      <div class="flex items-center gap-0.5 rounded-full border border-zinc-800 bg-zinc-900 p-1">
+        <button
+          type="button"
+          class="rounded-full px-4 py-1.5 text-sm transition-colors"
+          [ngClass]="
+            filtroAtivo === 'todos'
+              ? 'bg-violet-600/70 text-white'
+              : 'text-zinc-400 hover:text-zinc-200'
+          "
+          (click)="setFiltro('todos')"
+        >
+          Todos
+        </button>
+
+        <button
+          type="button"
+          class="rounded-full px-4 py-1.5 text-sm transition-colors"
+          [ngClass]="
+            filtroAtivo === 'entradas'
+              ? 'bg-violet-600/70 text-white'
+              : 'text-zinc-400 hover:text-zinc-200'
+          "
+          (click)="setFiltro('entradas')"
+        >
+          Entradas
+        </button>
+
+        <button
+          type="button"
+          class="rounded-full px-4 py-1.5 text-sm transition-colors"
+          [ngClass]="
+            filtroAtivo === 'saidas'
+              ? 'bg-violet-600/70 text-white'
+              : 'text-zinc-400 hover:text-zinc-200'
+          "
+          (click)="setFiltro('saidas')"
+        >
+          Saídas
+        </button>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-6">
+      <div class="min-w-0 flex-1 overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900">
+        <div
+          class="grid grid-cols-[2.2fr_1.2fr_1fr_1fr] border-b border-zinc-800 px-5 py-4 text-[11px] tracking-wider text-zinc-500"
+        >
+          <span>TRANSAÇÃO</span>
+          <span>DATA</span>
+          <span>STATUS</span>
+          <span class="text-right">VALOR</span>
+        </div>
+
+        @if (isLoading) {
+          @for (row of [1, 2, 3, 4, 5, 6]; track row) {
+            <div
+              class="grid grid-cols-[2.2fr_1.2fr_1fr_1fr] items-center border-b border-zinc-800 px-5 py-4 last:border-b-0"
+            >
+              <div class="flex items-center gap-3">
+                <div class="h-9 w-9 shrink-0 animate-pulse rounded-xl bg-zinc-800"></div>
+
+                <div class="flex flex-col gap-2">
+                  <div class="h-4 w-32 animate-pulse rounded bg-zinc-800"></div>
+                  <div class="h-5 w-24 animate-pulse rounded-md bg-zinc-800"></div>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-2">
+                <div class="h-4 w-24 animate-pulse rounded bg-zinc-800"></div>
+                <div class="h-3 w-16 animate-pulse rounded bg-zinc-800"></div>
+              </div>
+
+              <div>
+                <div class="h-4 w-20 animate-pulse rounded-full bg-zinc-800"></div>
+              </div>
+
+              <div class="flex justify-end">
+                <div class="h-4 w-24 animate-pulse rounded bg-zinc-800"></div>
+              </div>
+            </div>
+          }
+        } @else if (transacoesFiltradas.length === 0) {
+          <div class="flex flex-col items-center justify-center px-6 py-16 text-center">
+            <div class="mb-4 text-4xl">🧾</div>
+            <h3 class="text-lg font-semibold text-zinc-100">Nenhuma transação encontrada</h3>
+            <p class="mt-2 max-w-sm text-sm text-zinc-400">
+              Ajuste os filtros ou tente outro período para visualizar seus lançamentos.
+            </p>
+          </div>
+        } @else {
+          @for (t of transacoesFiltradas; track t.id) {
+            <div
+              class="grid grid-cols-[2.2fr_1.2fr_1fr_1fr] items-center border-b border-zinc-800 px-5 py-4 last:border-b-0"
+            >
+              <div class="flex items-center gap-3">
+                <div
+                  class="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
+                  [style.background-color]="getCategoryConfig(t.category).bgClass"
+                  [style.color]="getCategoryConfig(t.category).color"
+                >
+                  <svg-icon
+                    [src]="'icons/category/' + getCategoryConfig(t.category).icon"
+                    [svgStyle]="{ 'width.px': 16, 'height.px': 16 }"
+                  ></svg-icon>
+
+                  @if (t.alerta) {
+                    <span
+                      class="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-red-500 ring-2 ring-zinc-900"
+                    ></span>
+                  }
+                </div>
+
+                <div class="flex flex-col gap-1.5">
+                  <span class="text-sm font-medium">{{ t.nome }}</span>
+                  <span
+                    class="w-fit rounded-md border border-zinc-700/60 bg-zinc-800 px-2 py-0.5 text-[11px] text-zinc-400"
+                  >
+                    {{ t.categoriaLabel }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-1 text-sm">
+                <span>{{ t.data }}</span>
+                <span class="text-xs text-zinc-500">{{ t.hora }}</span>
+              </div>
+
+              <div>
+                <span
+                  class="inline-flex items-center gap-1.5 text-sm"
+                  [ngClass]="t.status === 'pendente' ? 'text-amber-400' : 'text-emerald-400'"
+                >
+                  <span
+                    class="h-1.5 w-1.5 rounded-full"
+                    [ngClass]="t.status === 'pendente' ? 'bg-amber-400' : 'bg-emerald-400'"
+                  ></span>
+                  {{ t.status === 'concluido' ? 'Concluído' : 'Pendente' }}
+                </span>
+              </div>
+
+              <div class="text-right">
+                <span
+                  class="text-sm font-medium"
+                  [ngClass]="t.tipo === 'entrada' ? 'text-emerald-400' : 'text-zinc-100'"
+                >
+                  {{ t.valor }}
+                </span>
+              </div>
+            </div>
+          }
+        }
+
+        <div class="flex justify-center py-5">
+          <button
+            type="button"
+            class="rounded-full border border-zinc-800 px-4 py-2 text-sm text-zinc-300 transition-colors hover:border-zinc-700"
+            (click)="carregarMais()"
+          >
+            Carregar Mais Transações
+          </button>
+        </div>
+      </div>
+
+      <aside class="w-75 shrink-0 flex flex-col gap-4">
+        <div
+          class="rounded-2xl border border-violet-900/40 bg-linear-to-br from-[#241f33] to-[#18151f] p-5"
+        >
+          <div class="mb-3 flex items-center gap-2.5">
+            <div
+              class="flex h-8 w-8 items-center justify-center rounded-full bg-[radial-gradient(circle_at_30%_30%,#b89bff,#6d5fa8)] text-sm"
+            >
+              ✨
+            </div>
+            <h3 class="text-[15px] font-semibold">Aura Insight</h3>
+          </div>
+
+          <p class="mb-4 text-[13px] leading-relaxed text-zinc-400">
+            Notei que você gastou 25% a mais em Delivery este mês comparado à sua média. Quer criar
+            um limite inteligente para esta categoria?
+          </p>
+
+          <div class="flex gap-2.5">
+            <button
+              type="button"
+              class="rounded-full bg-violet-400 px-4 py-2 text-sm font-semibold text-zinc-900 transition-colors hover:bg-violet-300"
+            >
+              Criar Limite
+            </button>
+
+            <button
+              type="button"
+              class="rounded-full border border-zinc-700 px-4 py-2 text-sm text-zinc-400 transition-colors hover:border-zinc-600 hover:text-zinc-200"
+            >
+              Ignorar
+            </button>
+          </div>
+        </div>
+
+        <div class="rounded-2xl border border-zinc-800 bg-zinc-900 p-5">
+          <div class="mb-4 flex items-center justify-between">
+            <h3 class="text-[15px] font-semibold">Resumo do Período</h3>
+            <span class="cursor-pointer text-zinc-500">⋯</span>
+          </div>
+
+          <div class="mb-3.5 flex h-24 items-end gap-2.5">
+            @for (v of resumoBarras; track $index; let i = $index) {
+              <div
+                class="min-h-1.5 flex-1 rounded-md"
+                [ngClass]="i === 2 ? 'bg-violet-400' : 'bg-zinc-700'"
+                [style.height.%]="v"
+              ></div>
+            }
+          </div>
+
+          <p class="text-[13px] text-zinc-400">
+            Saídas totais: <strong class="text-zinc-100">{{ saidasTotais }}</strong>
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
