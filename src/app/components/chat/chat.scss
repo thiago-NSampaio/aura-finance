@@ -3,3 +3,13 @@
   flex: 1;
   height: 100%;
 }
+
+.send-text-button {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .send-text-button {
+    display: inline-flex;
+  }
+}

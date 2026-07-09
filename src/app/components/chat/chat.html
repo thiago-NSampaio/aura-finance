@@ -81,21 +81,48 @@
   >
     <div class="max-w-5xl mx-auto w-full">
       <div class="h-16 rounded-full border border-[#FFFFFF10] bg-[#111214] flex items-center px-5">
-        <button class="w-8 h-8 flex items-center justify-center text-[#CFC2D6] cursor-pointer">
-          <svg-icon src="icons/plus.svg"></svg-icon>
-        </button>
-
         <input
           type="text"
           placeholder="Fale ou digite para a Aura..."
           class="flex-1 bg-transparent px-4 outline-none text-[#E5E2E1]"
+          [value]="text"
+          (input)="onTextInput($event)"
+          (keydown.enter)="sendText(); $event.preventDefault()"
         />
 
+        @if (!isRecording) {
+          <button
+            type="button"
+            class="voice-record-button flex gap-x-2 px-4 h-10 rounded-full items-center bg-[#DDB7FF20] text-[#DDB7FF] cursor-pointer"
+            [class.active]="isRecording"
+            (click)="toggleVoiceRecording()"
+            aria-label="Iniciar gravação de voz"
+          >
+            <svg-icon src="icons/voice.svg"></svg-icon>
+            <span class="sr-only">Iniciar gravação de voz</span>
+          </button>
+        }
+
+        @if (isRecording) {
+          <button
+            type="button"
+            class="voice-stop-button flex gap-x-2 px-4 h-10 rounded-full items-center bg-[#FF6B6B20] text-[#FF6B6B] cursor-pointer"
+            (click)="stopVoiceRecording()"
+            aria-label="Parar gravação de voz"
+          >
+            <svg-icon src="icons/voice.svg"></svg-icon>
+            <span class="text-sm font-medium">Parar</span>
+            <span class="sr-only">Parar gravação de voz</span>
+          </button>
+        }
+
         <button
-          class="flex gap-x-2 px-4 h-10 rounded-full items-center bg-[#DDB7FF20] text-[#DDB7FF] cursor-pointer"
+          type="button"
+          class="send-text-button hidden-phone w-8 h-8 flex items-center justify-center border-[#DDB7FF] text-[#DDB7FF] fill-[#DDB7FF] cursor-pointer"
+          [disabled]="!canSendText"
+          (click)="sendText()"
         >
-          <svg-icon src="icons/dynamic-waveform.svg"></svg-icon>
-          <svg-icon src="icons/voice.svg"></svg-icon>
+          <svg-icon src="icons/send.svg" [svgStyle]="{ width: '24px', height: '24px' }"></svg-icon>
         </button>
       </div>
 
