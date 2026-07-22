@@ -1,5 +1,4 @@
-import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-user-request',
@@ -8,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './user-request.scss',
 })
 export class UserRequest {
-
+  @Input() content = 'Mensagem enviada';
+  @Input() kind: 'text' | 'audio' = 'text';
 }

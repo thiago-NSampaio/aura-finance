@@ -1,1 +1,5 @@
-<app-chat [hasMessages]="hasMessages"></app-chat>
+<app-chat
+  [hasMessages]="hasMessages"
+  [messages]="messages"
+  (messageSent)="handleMessageSent($event)"
+></app-chat>

@@ -1,7 +1,14 @@
 <div class="flex justify-end">
   <div
-    class="max-w-md px-4 py-3 rounded-2xl rounded-tr-none rouded border border-[#FFFFFF10] bg-[#FFFFFF05]"
+    class="max-w-md px-4 py-3 rounded-2xl rounded-tr-none border border-[#FFFFFF10] bg-[#FFFFFF05]"
   >
-    Cancelei minha assinatura da Netflix
+    @if (kind === 'audio') {
+      <span class="flex items-center gap-2">
+        <span>🎤</span>
+        <span>Áudio enviado</span>
+      </span>
+    } @else {
+      {{ content }}
+    }
   </div>
 </div>

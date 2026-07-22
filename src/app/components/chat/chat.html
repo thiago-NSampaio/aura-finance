@@ -13,11 +13,22 @@
   @if (hasMessages) {
     <section class="flex-1 overflow-y-auto px-6">
       <div class="max-w-5xl mx-auto flex flex-col gap-y-8">
-        <app-user-request></app-user-request>
-        <app-assistant-response></app-assistant-response>
+        @for (message of messages; track message.content + message.kind + $index) {
+          @if (message.role === 'user') {
+            <app-user-request [content]="message.content" [kind]="message.kind"></app-user-request>
+          } @else {
+            <app-assistant-response
+              [content]="message.content"
+              [isPending]="message.status === 'pending'"
+            ></app-assistant-response>
+          }
+        }
       </div>
     </section>
   }
 
-  <app-input-chat [hasMessages]="hasMessages"></app-input-chat>
+  <app-input-chat
+    [hasMessages]="hasMessages"
+    (messageSent)="messageSent.emit($event)"
+  ></app-input-chat>
 </div>

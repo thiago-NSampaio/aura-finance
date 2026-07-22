@@ -6,20 +6,12 @@
       class="inline-block pl-1 rounded-2xl rounded-tl-none bg-linear-to-b from-[#DDB7FF] to-[#ADC6FF]"
     >
       <div class="rounded-2xl rounded-tl-none border border-[#DDB7FF20] bg-[#0F1013] p-4">
-        <p class="leading-relaxed">
-          Entendido. Registrei a remoção do gasto mensal de
-          <span class="text-[#DDB7FF] font-semibold rounded-full px-1.5 bg-[#DDB7FF10]">
-            R$ 55,90
-          </span>
-          na categoria
-          <span class="text-[#ADC6FF] font-semibold rounded-full px-1.5 bg-[#ADC6FF10]">
-            Entretenimento </span
-          >. Deseja ver como isso afeta seu saldo de final de mês?
-        </p>
+        @if (isPending) {
+          <p class="leading-relaxed text-[#CFC2D6]">A Aura está pensando...</p>
+        } @else {
+          <p class="leading-relaxed">{{ content }}</p>
+        }
       </div>
     </div>
-
-    <!-- Confirmation Card -->
-
   </div>
 </div>

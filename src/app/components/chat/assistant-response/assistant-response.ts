@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-assistant-response',
@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './assistant-response.scss',
 })
 export class AssistantResponse {
-
+  @Input() content = 'Entendido. Estou analisando sua solicitação.';
+  @Input() isPending = false;
 }

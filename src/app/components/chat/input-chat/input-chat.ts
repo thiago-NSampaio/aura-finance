@@ -1,16 +1,24 @@
 import { NgClass } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SvgIconComponent } from 'angular-svg-icon';
+
+export interface ChatMessage {
+  role: 'user' | 'assistant';
+  kind: 'text' | 'audio';
+  content: string;
+  status?: 'pending' | 'done';
+}
 
 @Component({
   selector: 'app-input-chat',
-  imports: [SvgIconComponent,NgClass],
+  imports: [SvgIconComponent, NgClass],
   templateUrl: './input-chat.html',
   styleUrl: './input-chat.scss',
 })
 export class InputChat {
   @Input({ required: true }) hasMessages: boolean = false;
-  
+  @Output() messageSent = new EventEmitter<ChatMessage>();
+
   text = '';
   isRecording = false;
   private mediaRecorder?: MediaRecorder;
@@ -31,7 +39,8 @@ export class InputChat {
       return;
     }
 
-    console.log('Enviando texto para Aura:', this.text);
+    const content = this.text.trim();
+    this.messageSent.emit({ role: 'user', kind: 'text', content });
     this.text = '';
   }
 
@@ -88,10 +97,11 @@ export class InputChat {
   }
 
   private handleVoiceBlob(blob: Blob): void {
-    console.log('Voz capturada:', blob);
-
     const url = URL.createObjectURL(blob);
     const audio = new Audio(url);
+
+    this.messageSent.emit({ role: 'user', kind: 'audio', content: 'Áudio enviado' });
+
     audio.play().catch(() => {
       console.warn('Não foi possível reproduzir o áudio capturado automaticamente.');
     });
